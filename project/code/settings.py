@@ -7,12 +7,16 @@ CELL_SIZE = 40
 GAME_WIDTH = COLUMN_WIDTH * CELL_SIZE
 GAME_HEIGHT = ROW_HEIGHT * CELL_SIZE
 
+
 # Sidebar size
 SIDEBAR_WIDTH = 200
+# Takes 70 percent of sidebar
 PREVIEW_HEIGHT_FRACTION = 0.7
+# Takes 30 percent of sidebar
 SCORE_HEIGHT_FRACTION = 1 - PREVIEW_HEIGHT_FRACTION
 
-# Window = sidebar size + game size + padding
+
+# Window size
 PADDING = 20
 WINDOW_WIDTH = GAME_WIDTH + SIDEBAR_WIDTH + PADDING * 3
 WINDOW_HEIGHT = GAME_HEIGHT + PADDING * 2
