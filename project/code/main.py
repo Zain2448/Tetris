@@ -33,11 +33,14 @@ class Main:
             # Sets frames per second
             self.clock.tick(60)
             # Background color
-            self.display_surface.fill((255, 0, 0))
+            self.display_surface.fill('#222222')
 
+
+            # Components
             self.game.run()
             self.score.run()
             self.preview.run()
+
 
 
 
