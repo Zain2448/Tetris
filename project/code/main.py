@@ -1,7 +1,7 @@
 from settings import *
 
 # Component
-from game import Game
+from game import Game, Block
 from score import Score
 from preview import Preview
 
@@ -18,6 +18,10 @@ class Main:
         self.game = Game()
         self.score = Score()
         self.preview = Preview()
+
+        # test
+        self.sprites = pygame.sprite.Group()
+        self.block = Block(self.sprites)
 
 
     def run(self):
@@ -40,6 +44,9 @@ class Main:
             self.game.run()
             self.score.run()
             self.preview.run()
+
+            self.block.run()
+
 
 
 
