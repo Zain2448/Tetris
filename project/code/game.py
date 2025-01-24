@@ -1,5 +1,4 @@
 import pygame.draw
-
 from settings import *
 
 class Game:
@@ -9,7 +8,7 @@ class Game:
 
         # Game surface
         self.surface = pygame.Surface((GAME_WIDTH, GAME_HEIGHT))
-        self.rect = self.surface.get_rect(topleft=(0,0))
+        self.rect = self.surface.get_rect(topleft=(PADDING,PADDING))
 
         # surface for the grid
         self.grid_surface = pygame.Surface((GAME_WIDTH, GAME_HEIGHT))
@@ -23,6 +22,14 @@ class Game:
         # now the can see the background color of the game surface
         self.surface.fill('#1C1C1C')
 
+        # Creating the sprites
+        self.sprites = pygame.sprite.Group()
+        # Columns and rows start from 0
+        self.block = Block(self.sprites, "blue", 0, 0)
+        self.block = Block(self.sprites, "blue", 6,6)
+        self.block = Block(self.sprites, "blue", 7, 6)
+        self.block = Block(self.sprites, "blue", 7, 5)
+        self.block = Block(self.sprites, "blue", 8, 6)
 
     def draw_grid(self):
         for col in range(1,COLUMNS):
@@ -37,19 +44,28 @@ class Game:
         self.surface.blit(self.grid_surface, (0, 0))
 
 
+
+
     def run(self):
         # allows you to place one game surface onto the main surface. You also have to give the x and y coordinates
-        self.draw_grid()
         self.display_surface.blit(self.surface, (PADDING, PADDING))
-        pygame.draw.rect(self.surface, (255,255,255),self.rect,1)
 
+        self.draw_grid()
+        pygame.draw.rect(self.display_surface, (255,255,255),self.rect,2,2)
 
+        # Places the sprite on the surface
+        self.sprites.draw(self.surface)
 
+class Block(pygame.sprite.Sprite):
+    def __init__(self, group, color, col, row):
+        # Sprites are place in a group. This group will update/move the sprite
+        super().__init__(group)
+        # Makes a surface that takes up exactly one block
+        self.image = pygame.Surface((CELL_SIZE, CELL_SIZE))
+        self.image.fill(color)
 
-
-
-
-
-
-
+        # position
+        x = col * CELL_SIZE
+        y = row * CELL_SIZE
+        self.rect = self.image.get_rect(topleft=(x,y))
 
