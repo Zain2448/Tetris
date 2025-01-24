@@ -31,6 +31,18 @@ class Game:
         self.block = Block(self.sprites, "blue", 7, 5)
         self.block = Block(self.sprites, "blue", 8, 6)
 
+        for i in range(0, 4):
+            color = TETROMINOS["I"]['color']
+            x = TETROMINOS["I"]['positions'][i][0]
+            y = TETROMINOS["I"]['positions'][i][1]
+            self.block = Block(self.sprites, color, x, y)
+
+        for i in range(0, 4):
+            color = TETROMINOS["O"]['color']
+            x = TETROMINOS["O"]['positions'][i][0]
+            y = TETROMINOS["O"]['positions'][i][1]
+            self.block = Block(self.sprites, color, x, y)
+
     def draw_grid(self):
         for col in range(1,COLUMNS):
             x = col * CELL_SIZE
