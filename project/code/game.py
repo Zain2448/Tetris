@@ -24,24 +24,14 @@ class Game:
 
         # Creating the sprites
         self.sprites = pygame.sprite.Group()
-        # Columns and rows start from 0
-        self.block = Block(self.sprites, "blue", 0, 0)
-        self.block = Block(self.sprites, "blue", 6,6)
-        self.block = Block(self.sprites, "blue", 7, 6)
-        self.block = Block(self.sprites, "blue", 7, 5)
-        self.block = Block(self.sprites, "blue", 8, 6)
 
-        for i in range(0, 4):
-            color = TETROMINOS["I"]['color']
-            x = TETROMINOS["I"]['positions'][i][0]
-            y = TETROMINOS["I"]['positions'][i][1]
-            self.block = Block(self.sprites, color, x, y)
+        for key in TETROMINOS:
+            for i in range(0, 4):
+                color = TETROMINOS[key]['color']
+                x = TETROMINOS[key]['positions'][i][0]
+                y = TETROMINOS[key]['positions'][i][1]
+                self.block = Block(self.sprites, color, x, y)
 
-        for i in range(0, 4):
-            color = TETROMINOS["O"]['color']
-            x = TETROMINOS["O"]['positions'][i][0]
-            y = TETROMINOS["O"]['positions'][i][1]
-            self.block = Block(self.sprites, color, x, y)
 
     def draw_grid(self):
         for col in range(1,COLUMNS):

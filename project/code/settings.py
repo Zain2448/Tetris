@@ -25,7 +25,12 @@ WINDOW_HEIGHT = GAME_HEIGHT + PADDING * 2
 # Tetromino - nested dictionary
 TETROMINOS = {
     'I': {'positions':[(0,0),(0,1),(0,2),(0,3)], 'color':'red'},
-    'O': {'positions':[(3,4),(3,5),(4,4),(4,5)], 'color':'blue'}
+    'O': {'positions':[(1,0),(1,1),(2,0),(2,1)], 'color':'blue'},
+    'L': {'positions':[(3,0),(3,1),(3,2),(4,2)], 'color':'green'},
+    'Z': {'positions':[(4,0),(5,0),(5,1),(6,1)], 'color':'yellow'},
+    'S': {'positions':[(7,1),(8,1),(8,0),(9,0)], 'color':'cyan'},
+    'T': {'positions':[(0,9),(1,9),(2,9),(1,8)], 'color':'magenta'},
+    'J': {'positions':[(5,7),(5,8),(5,9),(4,9)], 'color':'orange'},
 }
 
 
