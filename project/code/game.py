@@ -1,3 +1,5 @@
+import random
+
 import pygame.draw
 from settings import *
 
@@ -25,7 +27,8 @@ class Game:
         # Creating the sprites
         self.sprites = pygame.sprite.Group()
 
-        self.tetrominos = Tetrominos('T',self.sprites)
+        tetro_shapes = ['I','O','J','T','Z','S','L']
+        self.tetrominos = Tetrominos(random.choice(tetro_shapes),self.sprites)
 
 
     def draw_grid(self):
