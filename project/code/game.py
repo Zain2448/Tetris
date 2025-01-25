@@ -20,7 +20,7 @@ class Game:
         # This color is hidden/ignored
         self.grid_surface.set_colorkey((111,122,133))
         # Reduces transparency
-        self.grid_surface.set_alpha(60)
+        self.grid_surface.set_alpha(45)
 
 
         # Creating the sprites
@@ -29,7 +29,9 @@ class Game:
 
         # timer
         self.timers = {
-            'vertical_move': Timer(UPDATE_TIMER,True,self.move_down)
+            'vertical_move': Timer(UPDATE_TIMER,True,self.move_down),
+            # timer is need so when the key is pressed once it is moved once
+            'horizontal_move': Timer(MOVE_WAIT_TIME)
         }
         self.timers['vertical_move'].activate()
 
@@ -39,7 +41,6 @@ class Game:
 
     def move_down(self):
         self.tetromino.move_down()
-        print("moving down")
 
     def draw_grid(self):
         for col in range(1,COLUMNS):
@@ -53,6 +54,19 @@ class Game:
         # Places the grid surface on the game surface
         self.surface.blit(self.grid_surface, (0, 0))
 
+    def user_input(self):
+        # contains all the possible user inputs
+        keys = pygame.key.get_pressed()
+
+        if not self.timers['horizontal_move'].active:
+            if keys[pygame.K_LEFT]:
+                self.tetromino.move_horizontal(-1)
+                # now the timer is activated so the user cant press the button for 120 ms
+                self.timers['horizontal_move'].activate()
+            if keys[pygame.K_RIGHT]:
+                self.tetromino.move_horizontal(1)
+                self.timers['horizontal_move'].activate()
+
     def run(self):
         # allows you to place one game surface onto the main surface. You also have to give the x and y coordinates
         self.display_surface.blit(self.surface, (PADDING, PADDING))
@@ -63,9 +77,11 @@ class Game:
 
         # Places the sprite on the surface
         self.sprites.draw(self.surface)
-        # Update timer and Sprite
+        # Update timer and Sprite. These method are called continuously (i.e. frame by frame)
         self.timer_update()
         self.sprites.update()
+
+        self.user_input()
 
 
 
@@ -85,7 +101,6 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x,y))
 
     def update(self):
-        print(self.pos)
         x = self.pos.x * CELL_SIZE
         y = self.pos.y * CELL_SIZE
         self.rect = self.image.get_rect(topleft=(x, y))
@@ -103,4 +118,9 @@ class Tetrominos:
         for block in self.blocks:
             # Block is moved down by 1
             block.pos.y += 1
-            print(block.pos.y)
+
+    def move_horizontal(self, move_by):
+        for block in self.blocks:
+            block.pos.x += move_by
+
+

@@ -12,6 +12,7 @@ class Timer:
 
     def activate(self):
         self.active = True
+        # Gets current time
         self.start_time = get_ticks()
 
     def deactivate(self):
@@ -22,11 +23,11 @@ class Timer:
         current_time = get_ticks()
         if current_time - self.start_time >= self.duration and self.active:
 
-            # call a function
+            # call a function such as move_down
             if self.func and self.start_time != 0:
                 self.func()
 
-            # reset time
+            # resets time to 0 and deactivates it
             self.deactivate()
 
             # repeat the timer
