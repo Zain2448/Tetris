@@ -33,5 +33,7 @@ TETROMINOS = {
     'J': {'positions':[(5,7),(5,8),(5,9),(4,9)], 'color':'orange'},
 }
 
+UPDATE_TIMER = 500
+
 
 

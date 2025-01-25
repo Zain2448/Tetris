@@ -32,7 +32,7 @@ class Main:
             # Shows the window indefinitely
             pygame.display.update()
             # Sets frames per second
-            self.clock.tick(60)
+            self.clock.tick()
             # Background color
             self.display_surface.fill('#222222')
 
