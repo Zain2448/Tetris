@@ -25,12 +25,7 @@ class Game:
         # Creating the sprites
         self.sprites = pygame.sprite.Group()
 
-        for key in TETROMINOS:
-            for i in range(0, 4):
-                color = TETROMINOS[key]['color']
-                x = TETROMINOS[key]['positions'][i][0]
-                y = TETROMINOS[key]['positions'][i][1]
-                self.block = Block(self.sprites, color, x, y)
+        self.tetrominos = Tetrominos('T',self.sprites)
 
 
     def draw_grid(self):
@@ -70,4 +65,13 @@ class Block(pygame.sprite.Sprite):
         x = col * CELL_SIZE
         y = row * CELL_SIZE
         self.rect = self.image.get_rect(topleft=(x,y))
+
+class Tetrominos:
+    def __init__(self, shape, group):
+        self.color = TETROMINOS[shape]['color']
+
+        for i in range(0,4):
+            x = TETROMINOS[shape]['positions'][i][0]
+            y = TETROMINOS[shape]['positions'][i][1]
+            self.Blocks = Block(group, self.color, x, y)
 

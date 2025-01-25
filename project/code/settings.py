@@ -29,7 +29,7 @@ TETROMINOS = {
     'L': {'positions':[(3,0),(3,1),(3,2),(4,2)], 'color':'green'},
     'Z': {'positions':[(4,0),(5,0),(5,1),(6,1)], 'color':'yellow'},
     'S': {'positions':[(7,1),(8,1),(8,0),(9,0)], 'color':'cyan'},
-    'T': {'positions':[(0,9),(1,9),(2,9),(1,8)], 'color':'magenta'},
+    'T': {'positions':[(0,9),(1,9),(2,9),(1,10)], 'color':'magenta'},
     'J': {'positions':[(5,7),(5,8),(5,9),(4,9)], 'color':'orange'},
 }
 
