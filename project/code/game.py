@@ -31,7 +31,8 @@ class Game:
         self.timers = {
             'vertical_move': Timer(UPDATE_TIMER,True,self.move_down),
             # timer is need so when the key is pressed once it is moved once
-            'horizontal_move': Timer(MOVE_WAIT_TIME)
+            'horizontal_move': Timer(MOVE_WAIT_TIME),
+            'manual_down': Timer(MOVE_WAIT_TIME)
         }
         self.timers['vertical_move'].activate()
 
@@ -57,6 +58,11 @@ class Game:
     def user_input(self):
         # contains all the possible user inputs
         keys = pygame.key.get_pressed()
+
+        if not self.timers['manual_down'].active:
+           if keys[pygame.K_DOWN]:
+                self.timers['manual_down'].activate()
+                self.tetromino.move_down()
 
         if not self.timers['horizontal_move'].active:
             if keys[pygame.K_LEFT]:
@@ -117,6 +123,10 @@ class Tetrominos:
     def move_down(self):
         for block in self.blocks:
             # Block is moved down by 1
+            block.pos.y += 1
+
+    def manual_down(self):
+        for block in self.blocks:
             block.pos.y += 1
 
     def move_horizontal(self, move_by):
