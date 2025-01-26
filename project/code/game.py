@@ -89,9 +89,6 @@ class Game:
 
         self.user_input()
 
-
-
-
 class Block(pygame.sprite.Sprite):
     def __init__(self, group, color, pos):
         # Sprites are place in a group. This group will update/move the sprite
@@ -111,6 +108,15 @@ class Block(pygame.sprite.Sprite):
         y = self.pos.y * CELL_SIZE
         self.rect = self.image.get_rect(topleft=(x, y))
 
+    def side_collide(self,x):
+        if not 0 <= x < COLUMNS:
+            return True
+
+    def bottom_collide(self, y):
+        if not 0 <= y < ROWS:
+            return True
+
+
 
 class Tetrominos:
     def __init__(self, shape, group):
@@ -121,16 +127,31 @@ class Tetrominos:
         self.blocks = [Block(self.group, self.color, pos) for pos in self.block_positions]
 
     def move_down(self):
-        for block in self.blocks:
-            # Block is moved down by 1
-            block.pos.y += 1
+        if not self.hit_bottom_border(self.blocks, 1):
+            for block in self.blocks:
+                # Block is moved down by 1
+                block.pos.y += 1
 
     def manual_down(self):
-        for block in self.blocks:
-            block.pos.y += 1
+        if not self.hit_bottom_border(self.blocks,1):
+            for block in self.blocks:
+                block.pos.y += 1
 
     def move_horizontal(self, move_by):
-        for block in self.blocks:
-            block.pos.x += move_by
+        if not self.hit_side_border(self.blocks, move_by):
+            for block in self.blocks:
+                block.pos.x += move_by
 
+    def hit_bottom_border(self,blocks,move_by):
+        collision_list = [block.bottom_collide(int(block.pos.y + move_by)) for block in self.blocks]
+        if any(collision_list):
+            return True
+        else:
+            return False
 
+    def hit_side_border(self, blocks,move_by):
+        collision_list = [block.side_collide(int(block.pos.x + move_by)) for block in self.blocks]
+        if any(collision_list):
+            return True
+        else:
+            return False
